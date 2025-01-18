@@ -9,6 +9,9 @@
     <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+
     <style>
         * {
             margin: 0;
@@ -18,7 +21,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: url('sea2.jpg') no-repeat center center fixed;
+            background: url('chotet2025.jpg') repeat fixed center center;
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -51,6 +54,7 @@
             margin: 0;
             font-size: 3rem;
             letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Thêm đổ bóng cho chữ */
         }
 
         .title {
@@ -72,7 +76,7 @@
         }
 
         .image-container img {
-            width: calc(25% - 20px); /* Cho màn hình lớn */
+            width: calc(25% - 20px);
             height: auto;
             object-fit: cover;
             border-radius: 15px;
@@ -80,14 +84,12 @@
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        /* Thay đổi bố cục hình ảnh cho màn hình nhỏ */
         @media (max-width: 768px) {
             .image-container img {
-                width: 100%; /* Mỗi ảnh chiếm toàn bộ chiều ngang */
-                margin: 0 auto; /* Căn giữa ảnh */
+                width: 100%;
+                margin: 0 auto;
             }
         }
-
 
         .image-container img:hover {
             transform: scale(1.1);
@@ -120,11 +122,12 @@
             border: none;
             border-radius: 50px;
             padding: 10px 20px;
-            color: white;
+            color: rgb(255, 255, 255);
             font-size: 1.2rem;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: background 0.3s, transform 0.3s;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Thêm đổ bóng cho chữ "Play Music" và "Pause Music" */
         }
 
         .music-button:hover {
@@ -162,12 +165,114 @@
                 opacity: 1;
             }
         }
+
+        /* Hiệu ứng tuyết */
+        #snowfall {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .letter-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            z-index: 10; /* Đảm bảo phần tử này không bị che khuất */
+        }
+
+        .letter {
+            width: 450px;
+            height: 300px;
+            background-color: #f1c1a3;
+            border-radius: 15px;
+            padding: 20px;
+            transform: scaleY(0);
+            transform-origin: top;
+            overflow: hidden;
+            transition: transform 1s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0; /* Khởi tạo độ mờ */
+        }
+
+        .letter.open {
+            transform: scaleY(1); /* Mở lá thư */
+            opacity: 1; /* Đảm bảo lá thư hiển thị rõ */
+        }
+
+        .letter-content {
+            font-size: 1.2rem;
+            color: #333;
+            display: none;
+        }
+
+        .letter.open .letter-content {
+            display: block;
+        }
+
+        .letter-toggle-button {
+            position: absolute;
+            top: 275px;
+            padding: 15px 50px;
+            background-color: #f50612;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .letter-toggle-button:hover {
+            background-color: #ed240e;
+        }
     </style>
 </head>
 <body>
     <header class="glass-effect">
         <h1>MY PICTURES</h1>
     </header>
+
+    <div class="letter-container">
+        <div class="letter" id="letter">
+            <p class="letter-content">
+                Chào bạn, 
+                <br><br>
+                Tụi mình muốn nói rằng ... <br>
+                Chúc mừng năm mới, 2 đứa chúng mình chúc bạn 1 năm mới thật nhiều sức khỏe, gặp được nhiều may mắn trong cuộc sống, ...
+                <br><br>
+                Nói chung là chúc bạn tất cả trừ vất vả nha :D
+                <br><br>
+                            Ký tên: Chinh & Trúc
+            </p>
+        </div>
+        <button class="letter-toggle-button" id="letter-toggle-button">Mở lá thư</button>
+    </div>
 
     <div class="glass-effect">
         <div class="title">My Love</div>
@@ -180,29 +285,43 @@
             <img src="6.jpg" alt="My Love 6">
             <img src="7.jpg" alt="My Love 7">
             <img src="8.jpg" alt="My Love 8">
+            <img src="9.jpg" alt="My Love 9">
+            <img src="10.jpg" alt="My Love 10">
+            <img src="11.jpg" alt="My Love 11">
+            <img src="12.jpg" alt="My Love 12">
         </div>
-    
-    <!-- Phần hình ảnh bạn bè -->
+        
+        <div class="title">Me and her (Mini)</div>
+        <div class="image-container">
+            <img src="111.jpg" alt="My Love mini 1">
+            <img src="222.jpg" alt="My Love mini 2">
+            <img src="333.jpg" alt="My Love mini 3">
+            <img src="444.jpg" alt="My Love mini 4">
+        </div>    
+
         <div class="title">My Friends</div>
         <div class="image-container">
-            <img src="lop91.jpg" alt="Hình ảnh 1">
-            <img src="lop9.jpg" alt="Hình ảnh 2">
-            <img src="lop10.jpg" alt="Hình ảnh 3">
-            <img src="dblop12.jpg" alt="Hình ảnh 4">
-            <img src="pc.jpg" alt="Hình ảnh 5">
-            <img src="4vtron.jpg" alt="Hình ảnh 6">
-            <img src="cbqc.jpg" alt="Hình ảnh 7"> 
-            <img src="3anhem.jpg" alt="Hình ảnh 8"> 
+            <img src="lop91.jpg" alt="Friends 1">
+            <img src="lop9.jpg" alt="Friends 2">
+            <img src="lop10.jpg" alt="Friends 3">
+            <img src="dblop12.jpg" alt="Friends 4">
+            <img src="pc.jpg" alt="Friends 5">
+            <img src="4vtron.jpg" alt="Friends 6">
+            <img src="cbqc.jpg" alt="Friends 7"> 
+            <img src="3anhem.jpg" alt="Friends 8"> 
         </div>    
     </div>
 
     <footer>
-        <p>&copy; Bản quyền thuộc truongchinh304. <a href="https://www.facebook.com/nguyentruongchinh3004/">Mọi thắc mắc xin liên hệ</a></p>
+        <p>&copy; Bản quyền thuộc Trường Chinh. <a href="https://www.facebook.com/nguyentruongchinh3004/">Mọi thắc mắc xin liên hệ</a></p>
     </footer>
+
+    <!-- Hiệu ứng tuyết -->
+    <div id="snowfall"></div>
 
     <!-- Nút và file nhạc -->
     <button class="music-button" id="music-toggle">Play Music</button>
-    <audio id="background-music" src="chinh.mp3" loop></audio>
+    <audio id="background-music" src="hcmx.mp3" loop></audio>
 
     <script>
         const musicButton = document.getElementById('music-toggle');
@@ -219,6 +338,42 @@
             }
             isPlaying = !isPlaying;
         });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            document.body.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+        });
+
+        const snowContainer = document.getElementById('snowfall');
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            const size = Math.random() * 10 + 5;
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            snowContainer.appendChild(snowflake);
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+        setInterval(createSnowflake, 100);
+
+        const letterButton = document.getElementById('letter-toggle-button');
+        const letter = document.getElementById('letter');
+
+        letterButton.addEventListener('click', () => {
+            if (letter.classList.contains('open')) {
+                letter.classList.remove('open');
+                letterButton.textContent = 'Mở lá thư';
+            } else {
+                letter.classList.add('open');
+                letterButton.textContent = 'Đóng lá thư';
+            }
+        });
+
     </script>
 </body>
 </html>
