@@ -72,13 +72,22 @@
         }
 
         .image-container img {
-            width: calc(25% - 20px);
+            width: calc(25% - 20px); /* Cho màn hình lớn */
             height: auto;
             object-fit: cover;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
         }
+
+        /* Thay đổi bố cục hình ảnh cho màn hình nhỏ */
+        @media (max-width: 768px) {
+            .image-container img {
+                width: 100%; /* Mỗi ảnh chiếm toàn bộ chiều ngang */
+                margin: 0 auto; /* Căn giữa ảnh */
+            }
+        }
+
 
         .image-container img:hover {
             transform: scale(1.1);
